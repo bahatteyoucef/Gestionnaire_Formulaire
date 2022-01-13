@@ -172,7 +172,8 @@ class POSController extends Controller
                 else
                 {
                     ${$PLVInterieur ."_". $i}->save();
-                        
+                    $this->createPhotoPLVInterieur($request,$i,${$PLVInterieur ."_". $i});
+
                     $i                              =   $i+1;
 
                     $marque_sur_la_plv_interieur    =   $marque_sur_la_plv_interieur."_".   $i;              
@@ -190,8 +191,9 @@ class POSController extends Controller
         if($ajout)
         {
             ${$PLVInterieur ."_". $i}->save();
+            $this->createPhotoPLVInterieur($request,$i,${$PLVInterieur ."_". $i});
         }
-        
+
     }
 
     public function createPLVExterieur($request)
@@ -234,6 +236,7 @@ class POSController extends Controller
                 else
                 {
                     ${$PLVExterieur ."_". $i}->save();
+                    $this->createPhotoPLVExterieur($request,$i,${$PLVExterieur ."_". $i});
                         
                     $i                              =   $i+1;
 
@@ -252,6 +255,7 @@ class POSController extends Controller
         if($ajout)
         {
             ${$PLVExterieur ."_". $i}->save();
+            $this->createPhotoPLVExterieur($request,$i,${$PLVExterieur ."_". $i});
         }
 
     }
@@ -306,6 +310,7 @@ class POSController extends Controller
                 else
                 {
                     ${$facing ."_". $i}->save();
+                    $this->createPhotoFacing($request,$i,${$facing ."_". $i});                 
                         
                     $i                              =   $i+1;
 
@@ -327,6 +332,7 @@ class POSController extends Controller
         if($ajout)
         {
             ${$facing ."_". $i}->save();
+            $this->createPhotoFacing($request,$i,${$facing ."_". $i});                 
         }
 
     }
@@ -445,4 +451,97 @@ class POSController extends Controller
             }
         }
     }
+
+    public function createPhotoPLVInterieur($request,$i,$plv_interieur)
+    {
+        if($request->hasFile('Photo_PLV_interieur'."_".$i))
+        {
+            $allowedfileExtension=['jpeg','jpg','png'];
+            
+            if($i != 0)
+            {
+                $files = $request->file('Photo_PLV_interieur'."_".$i);
+            }
+            else
+            {
+                $files = $request->file('Photo_PLV_interieur');
+            }
+            
+            foreach($files as $file)
+            {
+                $filename   =   $file->getClientOriginalName();
+                $extension  =   $file->getClientOriginalExtension();
+
+                $check=in_array($extension,$allowedfileExtension);
+
+                foreach ($request->Photo_PLV_interieur as $Photo_PLV_interieur) 
+                {
+                    $filename = $Photo_PLV_interieur->store('Photos_PLV_interieur');
+                    //PLV_find_and_put_image_url_there
+                }
+            }
+        }
+    }
+
+    public function createPhotoPLVExterieur($request,$i,$plv_exterieur)
+    {
+        if($request->hasFile('Photo_PLV_exterieur'."_".$i))
+        {
+            $allowedfileExtension=['jpeg','jpg','png'];
+            
+            if($i != 0)
+            {
+                $files = $request->file('Photo_PLV_exterieur'."_".$i);
+            }
+            else
+            {
+                $files = $request->file('Photo_PLV_exterieur');
+            }
+            
+            foreach($files as $file)
+            {
+                $filename   =   $file->getClientOriginalName();
+                $extension  =   $file->getClientOriginalExtension();
+
+                $check=in_array($extension,$allowedfileExtension);
+
+                foreach ($request->Photo_PLV_interieur as $Photo_PLV_interieur) 
+                {
+                    $filename = $Photo_PLV_interieur->store('Photos_PLV_Exterieur');
+                    //PLV_find_and_put_image_url_there
+                }
+            }
+        }
+    }
+
+    public function createPhotoFacing($request,$i,$facing)
+    {
+        if($request->hasFile('Photo_facing'."_".$i))
+        {
+            $allowedfileExtension=['jpeg','jpg','png'];
+            if($i != 0)
+            {
+                $files = $request->file('Photo_facing'."_".$i);
+            }
+            else
+            {
+                $files = $request->file('Photo_facing');
+            }
+
+            foreach($files as $file)
+            {
+                $filename   =   $file->getClientOriginalName();
+                $extension  =   $file->getClientOriginalExtension();
+
+                $check=in_array($extension,$allowedfileExtension);
+
+                foreach ($request->Photo_PLV_interieur as $Photo_PLV_interieur) 
+                {
+                    $filename = $Photo_PLV_interieur->store('Photos_facing');
+                    //Facing_find_and_put_image_url_there
+                }
+            }
+        }
+    }
+
 }
