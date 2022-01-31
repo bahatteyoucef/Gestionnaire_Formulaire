@@ -10,25 +10,25 @@
         addGroupeNameAndButtons()
         addBreakBeforeFiles()
         RemoveHiddenTypes()
-        HideModelFrigo()
+        // HideModelFrigo()
         ToggleModelFrigo()
         AchatPourChaqueMarque()
+        addParentForButtonsAndEvents()
     })
 
+    // Formulaire Functions
     function addGroupeNameAndButtons()
     {
         var groupes     =   document.querySelectorAll('[id^="groupe___"]');
         groupes.forEach(groupe => {
 
             const elem      =   document.createElement('h4');
-            const elem_hr   =   document.createElement('hr');
-            const elem_br   =   document.createElement('br');
 
             // add text
-            elem.innerText = groupe.value;
+            elem.innerText  =   groupe.value;
+            elem.id         =   groupe.className;
 
             // insert the element before target element
-            groupe.parentNode.insertBefore(elem_br, groupe);
             groupe.parentNode.insertBefore(elem, groupe);
 
             PLV_Interieur_Button(elem,groupe)
@@ -37,8 +37,71 @@
             Frigo_Button(elem,groupe)
             // Achat_Button(elem,groupe)
 
-            groupe.parentNode.insertBefore(elem_hr, groupe);   
+            //
+
+            // Add div parent
+            var groupe_header       =   document.getElementById(elem.id)
+            var divParent           =   document.createElement("div")
+            
+            divParent.id            =   elem.id+"_1"
+
+            groupe_header.insertAdjacentElement("beforebegin",divParent)
+
+            addParentForGroupes(elem.id)
         });
+    }
+
+    function addParentForGroupes(groupe_id)
+    {       
+        var divParent           =   document.getElementById(groupe_id+"_1")
+
+        var divGroupeName       =   document.getElementById(groupe_id)
+        divParent.appendChild(divGroupeName)
+
+        var hrGroupeName        =   document.createElement("hr")
+        divParent.appendChild(hrGroupeName)
+
+        var divInputs           =   document.getElementsByClassName(groupe_id)
+
+        Array.from(divInputs).forEach((div_input) => {
+            if(div_input.parentElement.tagName  !=  "FORM")
+            {
+                divParent.appendChild(div_input.parentElement)
+            }
+
+            if(div_input.getAttribute("type")   ==  "button")
+            {
+                divParent.appendChild(div_input) // insert buttons but not in right place
+
+                if(div_input.previousElementSibling.tagName == "HR")
+                {
+                    div_input.previousElementSibling.remove()
+                }
+                
+                else
+                {
+                    div_input.insertAdjacentHTML("afterend","<hr />")
+                }
+            }
+        });
+
+        var brGroupeName        =   document.createElement('br');
+        divParent.appendChild(brGroupeName)
+    }
+
+    function addParentForButtonsAndEvents()
+    {       
+        const SubmitButton      =   document.getElementById("submit")
+        const BackButton        =   document.getElementById("back")
+        const SauvgarderButton  =   document.getElementById("sauvgarder")
+
+        SubmitButton.insertAdjacentHTML("beforebegin","<div id=\"submit_div\" class=\"text-center\">")
+
+        const SubmitDiv         =   document.getElementById("submit_div")
+
+        SubmitDiv.appendChild(SubmitButton)
+        SubmitDiv.appendChild(BackButton)
+        SubmitDiv.appendChild(SauvgarderButton)
     }
 
     function addBreakBeforeFiles()
@@ -87,23 +150,27 @@
             input_new.name              =   element.name        +   "_" +   m
             input_new.id                =   element.id          +   "_" +   m
             
-            if(element.tagName  ==  "INPUT")
+
+            if(element.getAttribute("type") != "button")
             {
-                label_new.innerHTML         =   element.previousSibling.previousSibling.previousSibling.innerHTML
-                input_new.type              =   "file"
+                if(element.tagName  ==  "INPUT")
+                {
+                    label_new.innerHTML         =   element.previousSibling.previousSibling.previousSibling.innerHTML
+                    input_new.type              =   "file"
 
-                div_block_nv_frigo.appendChild(label_new)
-                div_block_nv_frigo.appendChild(break_space_2)
-                div_block_nv_frigo.appendChild(input_new)
-            }
+                    div_block_nv_frigo.appendChild(label_new)
+                    div_block_nv_frigo.appendChild(break_space_2)
+                    div_block_nv_frigo.appendChild(input_new)
+                }
 
-            else
-            {
-                label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
-                input_new.innerHTML         =   element.innerHTML
+                else
+                {
+                    label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
+                    input_new.innerHTML         =   element.innerHTML
 
-                div_block_nv_frigo.appendChild(label_new)
-                div_block_nv_frigo.appendChild(input_new)
+                    div_block_nv_frigo.appendChild(label_new)
+                    div_block_nv_frigo.appendChild(input_new)
+                }
             }
 
             block_nv_frigo.appendChild(div_block_nv_frigo)
@@ -113,7 +180,6 @@
         element_insert.parentNode.parentNode.insertBefore(block_nv_frigo,element_insert.parentNode.nextSibling)
 
         var elm     =   GetElementInsideContainer("frigo_"+m, "Disponibilité_Frigo_"+m)
-        console.log(elm)
         
         elm.value   =   1;
 
@@ -141,11 +207,15 @@
             const button_frigo_minus        =   document.createElement('input');
             button_frigo_minus.type         =   "button"
             button_frigo_minus.value        =   "-"
-            
+
+            button_frigo_minus.classList.add(groupe.className);
+
             button_frigo_minus.addEventListener("click", Frigo_minus);
             
-            button_frigo_minus.style        =   "margin-left:20px;"
+            button_frigo_minus.style        =   "margin-left : 25px;margin-right : 5px;width:35px !important;height:35px !important;padding: 0px;"
+
             button_frigo_minus.className    =   "btn btn-warning me-2"
+            button_frigo_minus.classList.add(groupe.className);
 
             groupe.parentNode.insertBefore(button_frigo_minus, groupe);
         }
@@ -156,11 +226,14 @@
             const button_frigo      =   document.createElement('input');
             button_frigo.type       =   "button"
             button_frigo.value      =   "+"
-            
+            button_frigo.classList.add(groupe.className);
+
             button_frigo.addEventListener("click", Frigo);
             
-            button_frigo.style      =   "margin-left:5px;"
+            button_frigo.style      =   "width:35px !important;height:35px !important;padding: 0px;"
+
             button_frigo.className  =   "btn btn-primary me-2"
+            button_frigo.classList.add(groupe.className);
 
             groupe.parentNode.insertBefore(button_frigo, groupe);
         }
@@ -230,23 +303,26 @@
             input_new.name              =   element.name        +   "_" +   i
             input_new.id                =   element.id          +   "_" +   i
             
-            if(element.tagName  ==  "INPUT")
+            if(element.getAttribute("type") != "button")
             {
-                label_new.innerHTML         =   element.previousSibling.previousSibling.previousSibling.innerHTML
-                input_new.type              =   "file"
+                if(element.tagName  ==  "INPUT")
+                {
+                    label_new.innerHTML         =   element.previousSibling.previousSibling.previousSibling.innerHTML
+                    input_new.type              =   "file"
 
-                div_block_nv_plv_int.appendChild(label_new)
-                div_block_nv_plv_int.appendChild(break_space_2)
-                div_block_nv_plv_int.appendChild(input_new)
-            }
+                    div_block_nv_plv_int.appendChild(label_new)
+                    div_block_nv_plv_int.appendChild(break_space_2)
+                    div_block_nv_plv_int.appendChild(input_new)
+                }
 
-            else
-            {
-                label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
-                input_new.innerHTML         =   element.innerHTML
+                else
+                {
+                    label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
+                    input_new.innerHTML         =   element.innerHTML
 
-                div_block_nv_plv_int.appendChild(label_new)
-                div_block_nv_plv_int.appendChild(input_new)
+                    div_block_nv_plv_int.appendChild(label_new)
+                    div_block_nv_plv_int.appendChild(input_new)
+                }
             }
 
             block_nv_plv_int.appendChild(div_block_nv_plv_int)
@@ -261,7 +337,7 @@
 
     function PLV_Interieur_minus()
     {
-        var frigo_input                =   document.getElementById("info_sur_PLV_(photo)")
+        var frigo_input                =   document.getElementById("Marque_sur_la_PLV_Interieur")
         
         if(frigo_input.parentElement.nextElementSibling.nodeName != "BR")
         {
@@ -278,11 +354,14 @@
             const button_plv_int_minus      =   document.createElement('input');
             button_plv_int_minus.type       =   "button"
             button_plv_int_minus.value      =   "-"
-            
+            button_plv_int_minus.classList.add(groupe.className);
+
             button_plv_int_minus.addEventListener("click", PLV_Interieur_minus);
             
-            button_plv_int_minus.style      =   "margin-left:20px;"
+            button_plv_int_minus.style        =   "margin-left : 25px;margin-right : 5px;width:35px !important;height:35px !important;padding: 0px;"
+
             button_plv_int_minus.className  =   "btn btn-warning me-2"
+            button_plv_int_minus.classList.add(groupe.className);
 
             groupe.parentNode.insertBefore(button_plv_int_minus, groupe);
         }
@@ -293,11 +372,13 @@
             const button_plv_int    =   document.createElement('input');
             button_plv_int.type     =   "button"
             button_plv_int.value    =   "+"
+            button_plv_int.classList.add(groupe.className);
             
             button_plv_int.addEventListener("click", PLVInterior);
             
-            button_plv_int.style    =   "margin-left:5px;"
+            button_plv_int.style      =   "width:35px !important;height:35px !important;padding: 0px;"
             button_plv_int.className=   "btn btn-primary me-2"
+            button_plv_int.classList.add(groupe.className);
 
             groupe.parentNode.insertBefore(button_plv_int, groupe);
         }
@@ -340,23 +421,26 @@
             input_new.name              =   element.name        +   "_" +   j
             input_new.id                =   element.id          +   "_" +   j
             
-            if(element.tagName  ==  "INPUT")
+            if(element.getAttribute("type") != "button")
             {
-                label_new.innerHTML         =   element.previousSibling.previousSibling.previousSibling.innerHTML
-                input_new.type              =   "file"
+                if(element.tagName  ==  "INPUT")
+                {
+                    label_new.innerHTML         =   element.previousSibling.previousSibling.previousSibling.innerHTML
+                    input_new.type              =   "file"
 
-                div_block_nv_plv_int.appendChild(label_new)
-                div_block_nv_plv_int.appendChild(break_space_2)
-                div_block_nv_plv_int.appendChild(input_new)
-            }
+                    div_block_nv_plv_int.appendChild(label_new)
+                    div_block_nv_plv_int.appendChild(break_space_2)
+                    div_block_nv_plv_int.appendChild(input_new)
+                }
 
-            else
-            {
-                label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
-                input_new.innerHTML         =   element.innerHTML
+                else
+                {
+                    label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
+                    input_new.innerHTML         =   element.innerHTML
 
-                div_block_nv_plv_int.appendChild(label_new)
-                div_block_nv_plv_int.appendChild(input_new)
+                    div_block_nv_plv_int.appendChild(label_new)
+                    div_block_nv_plv_int.appendChild(input_new)
+                }
             }
 
             block_nv_plv_int.appendChild(div_block_nv_plv_int)
@@ -388,11 +472,14 @@
             const button_plv_ext_minus      =   document.createElement('input');
             button_plv_ext_minus.type       =   "button"
             button_plv_ext_minus.value      =   "-"
-            
+            button_plv_ext_minus.classList.add(groupe.className);
+
             button_plv_ext_minus.addEventListener("click", PLVExterieur_minus);
             
-            button_plv_ext_minus.style      =   "margin-left:20px;"
+            button_plv_ext_minus.style        =   "margin-left : 25px;margin-right : 5px;width:35px !important;height:35px !important;padding: 0px;"
+
             button_plv_ext_minus.className  =   "btn btn-warning me-2"
+            button_plv_ext_minus.classList.add(groupe.className);
 
             groupe.parentNode.insertBefore(button_plv_ext_minus, groupe);
         }
@@ -403,11 +490,13 @@
             const button_plv_ext    =   document.createElement('input');
             button_plv_ext.type     =   "button"
             button_plv_ext.value    =   "+"
-            
+            button_plv_ext.classList.add(groupe.className);
+  
             button_plv_ext.addEventListener("click", PLVExterieur);
             
-            button_plv_ext.style    =   "margin-left:5px;"
+            button_plv_ext.style      =   "width:35px !important;height:35px !important;padding: 0px;"
             button_plv_ext.className=   "btn btn-primary me-2"
+            button_plv_ext.classList.add(groupe.className);
 
             groupe.parentNode.insertBefore(button_plv_ext, groupe);
         }
@@ -449,36 +538,39 @@
             input_new.name              =   element.name        +   "_" +   l
             input_new.id                =   element.id          +   "_" +   l
 
-            if(element.tagName  ==  "INPUT")
+            if(element.getAttribute("type") != "button")
             {
-                if(element.getAttribute("type")  ==  "text")
+                if(element.tagName  ==  "INPUT")
                 {
-                    label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
-                    input_new.type              =   "text"
+                    if(element.getAttribute("type")  ==  "text")
+                    {
+                        label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
+                        input_new.type              =   "text"
 
-                    div_block_facing.appendChild(label_new)
-                    div_block_facing.appendChild(break_space_2)
-                    div_block_facing.appendChild(input_new)
+                        div_block_facing.appendChild(label_new)
+                        div_block_facing.appendChild(break_space_2)
+                        div_block_facing.appendChild(input_new)
+                    }
+
+                    else
+                    {
+                        label_new.innerHTML         =   element.previousSibling.previousSibling.previousSibling.innerHTML
+                        input_new.type              =   "file"
+
+                        div_block_facing.appendChild(label_new)
+                        div_block_facing.appendChild(break_space_2)
+                        div_block_facing.appendChild(input_new)
+                    }
                 }
 
                 else
                 {
-                    label_new.innerHTML         =   element.previousSibling.previousSibling.previousSibling.innerHTML
-                    input_new.type              =   "file"
+                    label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
+                    input_new.innerHTML         =   element.innerHTML
 
                     div_block_facing.appendChild(label_new)
-                    div_block_facing.appendChild(break_space_2)
                     div_block_facing.appendChild(input_new)
                 }
-            }
-
-            else
-            {
-                label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
-                input_new.innerHTML         =   element.innerHTML
-
-                div_block_facing.appendChild(label_new)
-                div_block_facing.appendChild(input_new)
             }
 
             block_facing.appendChild(div_block_facing)
@@ -506,14 +598,18 @@
         if(elem.innerText   ==  "Disponibilité de produit / Facing / prix")
         {
             elem.style                  =   "display:inline-block;";
-            const facing_button_minus    =   document.createElement('input');
-            facing_button_minus.type     =   "button"
-            facing_button_minus.value    =   "-"
-            
+            const facing_button_minus   =   document.createElement('input');
+            facing_button_minus.type    =   "button"
+            facing_button_minus.value   =   "-"
+            facing_button_minus.classList.add(groupe.className);
+            facing_button_minus.id      =   "facing_button_minus_id";
+
             facing_button_minus.addEventListener("click", Facing_minus);
             
-            facing_button_minus.style    =   "margin-left:20px;"
+            facing_button_minus.style        =   "margin-left : 25px;margin-right : 5px;width:35px !important;height:35px !important;padding: 0px;"
+
             facing_button_minus.className=   "btn btn-warning me-2"
+            facing_button_minus.classList.add(groupe.className);
 
             groupe.parentNode.insertBefore(facing_button_minus, groupe);
         }
@@ -524,11 +620,15 @@
             const facing_button     =   document.createElement('input');
             facing_button.type      =   "button"
             facing_button.value     =   "+"
-            
+            facing_button.classList.add(groupe.className);
+            facing_button.id        =   "facing_button_id";
+
             facing_button.addEventListener("click", Facing);
             
-            facing_button.style     =   "margin-left:5px;"
+            facing_button.style     =   "width:35px !important;height:35px !important;padding: 0px;"
+
             facing_button.className =   "btn btn-primary me-2"
+            facing_button.classList.add(groupe.className);
 
             groupe.parentNode.insertBefore(facing_button, groupe);
         }
@@ -580,25 +680,28 @@
             input_new.name              =   element.name        +   "_" +   k
             input_new.id                =   element.id          +   "_" +   k
 
-            if(element.tagName  ==  "INPUT")
+            if(element.getAttribute("type") != "button")
             {
-                label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
-                input_new.type              =   "text"
+                if(element.tagName  ==  "INPUT")
+                {
+                    label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
+                    input_new.type              =   "text"
 
-                div_block_achat.appendChild(label_new)
-                div_block_achat.appendChild(break_space_2)
-                div_block_achat.appendChild(input_new)
+                    div_block_achat.appendChild(label_new)
+                    div_block_achat.appendChild(break_space_2)
+                    div_block_achat.appendChild(input_new)
+                }
+
+                else
+                {
+                    label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
+                    input_new.innerHTML         =   element.innerHTML
+
+                    div_block_achat.appendChild(label_new)
+                    div_block_achat.appendChild(input_new)
+                }
             }
-
-            else
-            {
-                label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
-                input_new.innerHTML         =   element.innerHTML
-
-                div_block_achat.appendChild(label_new)
-                div_block_achat.appendChild(input_new)
-            }
-
+            
             block_achat.appendChild(div_block_achat)
         });
 
@@ -620,52 +723,6 @@
             groupe.remove()
         })
     }
-
-    /*        
-        function Achat_minus()
-        {
-            var achat_input                =   document.getElementById("Qte_vendu_par_Jour")
-            
-            if(achat_input.parentElement.nextElementSibling.nodeName != "BR")
-            {
-                achat_input.parentElement.nextElementSibling.remove()
-                k   =   k-1
-            }
-        }
-
-        function Achat_Button(elem,groupe)
-        {
-            if(elem.innerText   ==  "Achat")
-            {
-                elem.style                  =   "display:inline-block;";
-                const button_achat_minus    =   document.createElement('input');
-                button_achat_minus.type     =   "button"
-                button_achat_minus.value    =   "-"
-                
-                button_achat_minus.addEventListener("click", Achat_minus);
-                
-                button_achat_minus.style    =   "margin-left:20px;"
-                button_achat_minus.className=   "btn btn-warning me-2"
-
-                groupe.parentNode.insertBefore(button_achat_minus, groupe);
-            }
-
-            if(elem.innerText   ==  "Achat")
-            {
-                elem.style              =   "display:inline-block;";
-                const button_achat      =   document.createElement('input');
-                button_achat.type       =   "button"
-                button_achat.value      =   "+"
-                
-                button_achat.addEventListener("click", Achat);
-                
-                button_achat.style      =   "margin-left:5px;"
-                button_achat.className  =   "btn btn-primary me-2"
-
-                groupe.parentNode.insertBefore(button_achat, groupe);
-            }
-        }
-    */
 
     function GriserSelect(select)
     {

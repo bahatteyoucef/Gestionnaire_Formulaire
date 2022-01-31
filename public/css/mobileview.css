@@ -1,0 +1,18 @@
+@media (max-width:480px)
+{
+    #facing_button_minus_id    
+    {
+        margin-left: 3px !important;
+    }
+}
+
+table td
+{
+    padding :   10px !important;
+}
+
+body input[type="file"]
+{
+    width   :   100%!important;
+}
+    

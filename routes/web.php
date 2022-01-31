@@ -14,6 +14,7 @@ Route::resource('formulaires', FormulaireController::class);
 Route::prefix('formulaires/{id_formulaire}')->group(function () {
     Route::get('/activateDesactivate'           ,   [FormulaireController::class, 'formulaireActivateDisactivate'])         ->name('formulaire.activateDisactivate');
     Route::get('/visualisation'                 ,   [FormulaireController::class, 'visualisation'])                         ->name('formulaire.visualisation');
+    Route::get('/mobilevisualisation'           ,   [FormulaireController::class, 'mobileVisualisation'])                         ->name('formulaire.mobilevisualisation');
 
     Route::get('/groupes'           ,   [FormulaireController::class, 'formulaireGroupes'])         ->name('formulaire_groupes.index');
     Route::get('/groupes/create'    ,   [FormulaireController::class, 'formulaireGroupesCreate'])   ->name('formulaire_groupes.create');

@@ -96,11 +96,27 @@ class FormulaireController extends Controller
         $formulaire =   FormulaireGroupeQuestion::where('id_Formulaire','=',$id_formulaire)->orderby("ordre_groupe")->orderby("ordre_question")->get();
 
         $form = \FormBuilder::create(\App\Forms\FormulaireForm::class, [
-            'method'    => 'POST', 
-            'route'     => 'POS.store'
-        ],['formulaire' =>  $formulaire]);
+            'method'        => 'POST', 
+            'route'         => 'POS.store'
+        ],['formulaire'     =>  $formulaire,
+            'id_formulaire' =>  $id_formulaire    
+    ]);
 
         return view( $this->url.'.visualisation')->with('form',$form);
+    }
+
+    public function mobileVisualisation($id_formulaire)
+    {
+        $formulaire =   FormulaireGroupeQuestion::where('id_Formulaire','=',$id_formulaire)->orderby("ordre_groupe")->orderby("ordre_question")->get();
+
+        $form = \FormBuilder::create(\App\Forms\mobileFormulaireForm::class, [
+            'method'        => 'POST', 
+            'route'         => 'POS.store'
+        ],['formulaire'     =>  $formulaire,
+            'id_formulaire' =>  $id_formulaire    
+        ]);
+
+        return view( $this->url.'./mobile/mobilevisualisation')->with('form',$form);
     }
 
     //

@@ -8,7 +8,7 @@ use App\Models\Groupe;
 
 use Kris\LaravelFormBuilder\Form;
 
-class FormulaireForm extends Form
+class mobileFormulaireForm extends Form
 {
     public $types_questions     =   [];
     public $i                   =   0;   
@@ -58,6 +58,8 @@ class FormulaireForm extends Form
         }
 
         $this->addSubmit();
+        $this->addBack();
+        $this->addSauvgarder();
     }
 
     private function addSubmit()
@@ -66,7 +68,33 @@ class FormulaireForm extends Form
             'attr'  => [
                 "name"  =>  "submit",
                 "id"    =>  "submit",
-                "class" =>  "btn btn-primary me-2"
+                "class" =>  "btn btn-primary"
+            ]
+        ]);
+    }
+
+    private function addBack()
+    {
+        $this->add("Back", "button", [
+            'attr'  => [
+                "name"  =>  "back",
+                "id"    =>  "back",
+                "class" =>  "btn btn-primary",
+                "style" =>  "margin-right : 21px;float:left",
+                "type"  =>  "button"
+            ]
+        ]);
+    }
+
+    private function addSauvgarder()
+    {
+        $this->add("Sauvgarder", "button", [
+            'attr'  => [
+                "name"      =>  "sauvgarder",
+                "id"        =>  "sauvgarder",
+                "class"     =>  "btn btn-primary",
+                "style"     =>  "float:right;",
+                "type"      =>  "button"
             ]
         ]);
     }
@@ -205,6 +233,7 @@ class FormulaireForm extends Form
                 'attr' => [
                     'id'    =>  'groupe___'.$groupe->id_groupe,
                     'value' =>  $groupe->nom_groupe,
+                    'class' =>  'groupe_'.$groupe->id_groupe,
                     'hidden'=>  "hidden"
                 ]
             ]

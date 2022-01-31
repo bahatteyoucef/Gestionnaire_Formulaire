@@ -103,7 +103,7 @@
                   </button>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                    <a class="dropdown-item" href="{{route('formulaire.visualisation',$formulaire->id_formulaire)}}">Visualiser le formulaire</a>
+                    <a class="dropdown-item" href="{{route('formulaire.mobilevisualisation',$formulaire->id_formulaire)}}">Visualiser le formulaire</a>
                     <a class="dropdown-item" href="{{route('formulaires.show',$formulaire->id_formulaire)}}">Consulter les Details</a>
                     <a class="dropdown-item" href="{{route('formulaire_questions.index',$formulaire->id_formulaire)}}">Lister les Questions</a>
                     <a class="dropdown-item" href="{{route('formulaire_groupes.index',$formulaire->id_formulaire)}}">Lister les Groupes</a>
