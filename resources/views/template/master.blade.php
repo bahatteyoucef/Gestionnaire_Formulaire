@@ -30,8 +30,8 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="{{url('template/images/favicon.png')}}" />
 
-        <!-- plugins:js -->
-        <script src="{{url('template/vendors/js/vendor.bundle.base.js')}}"></script>
+    <!-- plugins:js -->
+    <script src="{{url('template/vendors/js/vendor.bundle.base.js')}}"></script>
     <!-- endinject -->
 
     <!-- Plugin js for this page -->
