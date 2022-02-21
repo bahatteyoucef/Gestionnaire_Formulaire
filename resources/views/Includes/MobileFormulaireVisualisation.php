@@ -34,7 +34,7 @@
             PLV_Interieur_Button(elem,groupe)
             PLV_Exterieur_Button(elem,groupe)
             Facing_Button(elem,groupe)
-            Frigo_Button(elem,groupe)
+            // Frigo_Button(elem,groupe)
             // Achat_Button(elem,groupe)
 
             //
@@ -95,6 +95,9 @@
         const BackButton        =   document.getElementById("back")
         const SauvgarderButton  =   document.getElementById("sauvgarder")
 
+        BackButton.classList.add("btn-success")
+        SauvgarderButton.classList.add("btn-success")
+
         SubmitButton.insertAdjacentHTML("beforebegin","<div id=\"submit_div\" class=\"text-center\">")
 
         const SubmitDiv         =   document.getElementById("submit_div")
@@ -114,78 +117,85 @@
         });
     }
 
+    //
+
     function Frigo()
     {
-        var frigo_inputs                =   document.getElementsByClassName("groupe_23")
-        
-        var break_line_1                =   document.createElement('hr')
-        var block_nv_frigo              =   document.createElement('div')
-        var break_space_1               =   document.createElement('br')
-        var break_line_2                =   document.createElement('hr')
-        var header_frigo                =   document.createElement('h4')
+        var Model_frigo     =   document.getElementById("Disponibilité_Frigo")
 
-        header_frigo.innerHTML          =   "Ajouter un nouveau frigo"
-        block_nv_frigo.id               =   "frigo_"+m
-
-        block_nv_frigo.appendChild(break_space_1)
-        block_nv_frigo.appendChild(break_line_1)
-        block_nv_frigo.appendChild(header_frigo)
-        block_nv_frigo.appendChild(break_line_2)
-
-        Array.from(frigo_inputs).forEach((element) => {
+        if(Model_frigo.value    ==  1)
+        {
+            var frigo_inputs                =   document.getElementsByClassName("groupe_23")
             
-            var div_block_nv_frigo          =   document.createElement("div")
-            div_block_nv_frigo.className    =   element.parentElement.className
-            
-            var  label_new                  =   document.createElement("label");
-            label_new.className             =   "control-label"
-            label_new.setAttribute("for", element.name  +   "_" +   m)
+            var break_line_1                =   document.createElement('hr')
+            var block_nv_frigo              =   document.createElement('div')
+            var break_space_1               =   document.createElement('br')
+            var break_line_2                =   document.createElement('hr')
+            var header_frigo                =   document.createElement('h4')
 
-            var  break_space_2          =   document.createElement("br");
+            header_frigo.innerHTML          =   "Ajouter un nouveau frigo"
+            block_nv_frigo.id               =   "frigo_"+m
 
-            var  input_new              =   document.createElement(element.tagName);
-            input_new.className         =   element.className
-            input_new.classList.remove("groupe_23");
+            block_nv_frigo.appendChild(break_space_1)
+            block_nv_frigo.appendChild(break_line_1)
+            block_nv_frigo.appendChild(header_frigo)
+            block_nv_frigo.appendChild(break_line_2)
 
-            input_new.name              =   element.name        +   "_" +   m
-            input_new.id                =   element.id          +   "_" +   m
-            
+            Array.from(frigo_inputs).forEach((element) => {
+                
+                var div_block_nv_frigo          =   document.createElement("div")
+                div_block_nv_frigo.className    =   element.parentElement.className
+                
+                var  label_new                  =   document.createElement("label");
+                label_new.className             =   "control-label"
+                label_new.setAttribute("for", element.name  +   "_" +   m)
 
-            if(element.getAttribute("type") != "button")
-            {
-                if(element.tagName  ==  "INPUT")
+                var  break_space_2          =   document.createElement("br");
+
+                var  input_new              =   document.createElement(element.tagName);
+                input_new.className         =   element.className
+                input_new.classList.remove("groupe_23");
+
+                input_new.name              =   element.name        +   "_" +   m
+                input_new.id                =   element.id          +   "_" +   m
+                
+
+                if(element.getAttribute("type") != "button")
                 {
-                    label_new.innerHTML         =   element.previousSibling.previousSibling.previousSibling.innerHTML
-                    input_new.type              =   "file"
+                    if(element.tagName  ==  "INPUT")
+                    {
+                        label_new.innerHTML         =   element.previousSibling.previousSibling.previousSibling.innerHTML
+                        input_new.type              =   "file"
 
-                    div_block_nv_frigo.appendChild(label_new)
-                    div_block_nv_frigo.appendChild(break_space_2)
-                    div_block_nv_frigo.appendChild(input_new)
+                        div_block_nv_frigo.appendChild(label_new)
+                        div_block_nv_frigo.appendChild(break_space_2)
+                        div_block_nv_frigo.appendChild(input_new)
+                    }
+
+                    else
+                    {
+                        label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
+                        input_new.innerHTML         =   element.innerHTML
+
+                        div_block_nv_frigo.appendChild(label_new)
+                        div_block_nv_frigo.appendChild(input_new)
+                    }
                 }
 
-                else
-                {
-                    label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
-                    input_new.innerHTML         =   element.innerHTML
+                block_nv_frigo.appendChild(div_block_nv_frigo)
+            });
 
-                    div_block_nv_frigo.appendChild(label_new)
-                    div_block_nv_frigo.appendChild(input_new)
-                }
-            }
+            var element_insert              =   document.getElementById("Photo_du_frigo")
+            element_insert.parentNode.parentNode.insertBefore(block_nv_frigo,element_insert.parentNode.nextSibling)
 
-            block_nv_frigo.appendChild(div_block_nv_frigo)
-        });
+            var elm     =   GetElementInsideContainer("frigo_"+m, "Disponibilité_Frigo_"+m)
+            
+            elm.value   =   1;
 
-        var element_insert              =   document.getElementById("Photo_du_frigo")
-        element_insert.parentNode.parentNode.insertBefore(block_nv_frigo,element_insert.parentNode.nextSibling)
+            GriserSelect("Disponibilité_Frigo_"+m)
 
-        var elm     =   GetElementInsideContainer("frigo_"+m, "Disponibilité_Frigo_"+m)
-        
-        elm.value   =   1;
-
-        GriserSelect("Disponibilité_Frigo_"+m)
-
-        m   =   m+1;
+            m   =   m+1;
+        }
     }
 
     function Frigo_minus()
@@ -214,8 +224,9 @@
             
             button_frigo_minus.style        =   "margin-left : 25px;margin-right : 5px;width:35px !important;height:35px !important;padding: 0px;"
 
-            button_frigo_minus.className    =   "btn btn-warning me-2"
+            button_frigo_minus.className    =   "btn  me-2"
             button_frigo_minus.classList.add(groupe.className);
+            button_frigo_minus.classList.add("btn-minus");
 
             groupe.parentNode.insertBefore(button_frigo_minus, groupe);
         }
@@ -227,13 +238,14 @@
             button_frigo.type       =   "button"
             button_frigo.value      =   "+"
             button_frigo.classList.add(groupe.className);
-
+            
             button_frigo.addEventListener("click", Frigo);
             
             button_frigo.style      =   "width:35px !important;height:35px !important;padding: 0px;"
 
-            button_frigo.className  =   "btn btn-primary me-2"
+            button_frigo.className  =   "btn  me-2"
             button_frigo.classList.add(groupe.className);
+            button_frigo.classList.add("btn-add");
 
             groupe.parentNode.insertBefore(button_frigo, groupe);
         }
@@ -251,20 +263,23 @@
     {
         var Model_frigo     =   document.getElementById("Disponibilité_Frigo")
 
-        Model_frigo.addEventListener("change", function(event) { 
-
+        Model_frigo.addEventListener("change", function(event) 
+        { 
             if(event.target.value   ==  1)
             {
-                Model_frigo.parentElement.nextSibling.nextSibling.style                         =   "display:block"
-                Model_frigo.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.style =   "display:block"
+                Model_frigo.parentElement.nextSibling.style                                 =   "display:block"
+                Model_frigo.parentElement.nextSibling.nextSibling.style                     =   "display:block"
             }
+            
             else
             {
-                Model_frigo.parentElement.nextSibling.nextSibling.style                         =   "display:none"
-                Model_frigo.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.style =   "display:none"
+                Model_frigo.parentElement.nextSibling.style                                 =   "display:none"
+                Model_frigo.parentElement.nextSibling.nextSibling.style                     =   "display:none"
             }
         })
     }
+
+    //
 
     function PLVInterior()
     {
@@ -354,14 +369,16 @@
             const button_plv_int_minus      =   document.createElement('input');
             button_plv_int_minus.type       =   "button"
             button_plv_int_minus.value      =   "-"
+
             button_plv_int_minus.classList.add(groupe.className);
 
             button_plv_int_minus.addEventListener("click", PLV_Interieur_minus);
             
             button_plv_int_minus.style        =   "margin-left : 25px;margin-right : 5px;width:35px !important;height:35px !important;padding: 0px;"
 
-            button_plv_int_minus.className  =   "btn btn-warning me-2"
+            button_plv_int_minus.className  =   "btn  me-2"
             button_plv_int_minus.classList.add(groupe.className);
+            button_plv_int_minus.classList.add("btn-minus");
 
             groupe.parentNode.insertBefore(button_plv_int_minus, groupe);
         }
@@ -377,12 +394,15 @@
             button_plv_int.addEventListener("click", PLVInterior);
             
             button_plv_int.style      =   "width:35px !important;height:35px !important;padding: 0px;"
-            button_plv_int.className=   "btn btn-primary me-2"
+            button_plv_int.className=   "btn  me-2"
             button_plv_int.classList.add(groupe.className);
+            button_plv_int.classList.add("btn-add");
 
             groupe.parentNode.insertBefore(button_plv_int, groupe);
         }
     }
+
+    //
 
     function PLVExterieur()
     {
@@ -472,14 +492,16 @@
             const button_plv_ext_minus      =   document.createElement('input');
             button_plv_ext_minus.type       =   "button"
             button_plv_ext_minus.value      =   "-"
+
             button_plv_ext_minus.classList.add(groupe.className);
 
             button_plv_ext_minus.addEventListener("click", PLVExterieur_minus);
             
             button_plv_ext_minus.style        =   "margin-left : 25px;margin-right : 5px;width:35px !important;height:35px !important;padding: 0px;"
 
-            button_plv_ext_minus.className  =   "btn btn-warning me-2"
+            button_plv_ext_minus.className  =   "btn  me-2"
             button_plv_ext_minus.classList.add(groupe.className);
+            button_plv_ext_minus.classList.add("btn-minus");
 
             groupe.parentNode.insertBefore(button_plv_ext_minus, groupe);
         }
@@ -495,12 +517,16 @@
             button_plv_ext.addEventListener("click", PLVExterieur);
             
             button_plv_ext.style      =   "width:35px !important;height:35px !important;padding: 0px;"
-            button_plv_ext.className=   "btn btn-primary me-2"
+            button_plv_ext.className=   "btn  me-2"
+
             button_plv_ext.classList.add(groupe.className);
+            button_plv_ext.classList.add("btn-add");
 
             groupe.parentNode.insertBefore(button_plv_ext, groupe);
         }
     }
+
+    //
 
     function Facing()
     {
@@ -601,15 +627,18 @@
             const facing_button_minus   =   document.createElement('input');
             facing_button_minus.type    =   "button"
             facing_button_minus.value   =   "-"
+
             facing_button_minus.classList.add(groupe.className);
+
             facing_button_minus.id      =   "facing_button_minus_id";
 
             facing_button_minus.addEventListener("click", Facing_minus);
             
             facing_button_minus.style        =   "margin-left : 25px;margin-right : 5px;width:35px !important;height:35px !important;padding: 0px;"
 
-            facing_button_minus.className=   "btn btn-warning me-2"
+            facing_button_minus.className=   "btn  me-2"
             facing_button_minus.classList.add(groupe.className);
+            facing_button_minus.classList.add("btn-minus");
 
             groupe.parentNode.insertBefore(facing_button_minus, groupe);
         }
@@ -621,30 +650,42 @@
             facing_button.type      =   "button"
             facing_button.value     =   "+"
             facing_button.classList.add(groupe.className);
+
             facing_button.id        =   "facing_button_id";
 
             facing_button.addEventListener("click", Facing);
             
             facing_button.style     =   "width:35px !important;height:35px !important;padding: 0px;"
 
-            facing_button.className =   "btn btn-primary me-2"
+            facing_button.className =   "btn  me-2"
             facing_button.classList.add(groupe.className);
+            facing_button.classList.add("btn-add");
 
             groupe.parentNode.insertBefore(facing_button, groupe);
         }
     }
 
+    //
+
     function AchatPourChaqueMarque()
     {
-        Array.from(document.getElementById("Marque_de_produit_(Achat)").options).forEach(function(option_element) {
-            if(option_element.value !=  1)
-            {
-                Achat(option_element.value)
-            }
+        let i = 0
+        
+        Array.from(document.getElementById("Marque_de_produit_(Achat)").options).forEach(function(option_marque) 
+        {
+            Array.from(document.getElementById("Type_de_produit_(Achat)").options).forEach(function(option_type) 
+            {   
+                if(i    >   0)
+                {
+                    Achat(option_marque.value,option_type.value)
+                }
+
+                i   =   i+1
+            });
         });
     }
 
-    function Achat(option_value)
+    function Achat(option_marque,option_type)
     {
         var Achat_inputs                =   document.getElementsByClassName("groupe_33")
         
@@ -680,9 +721,9 @@
             input_new.name              =   element.name        +   "_" +   k
             input_new.id                =   element.id          +   "_" +   k
 
-            if(element.getAttribute("type") != "button")
+            if(element.tagName  ==  "INPUT")
             {
-                if(element.tagName  ==  "INPUT")
+                if(element.type !=  "button")
                 {
                     label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
                     input_new.type              =   "text"
@@ -691,30 +732,49 @@
                     div_block_achat.appendChild(break_space_2)
                     div_block_achat.appendChild(input_new)
                 }
+            }
 
-                else
+            else
+            {
+                label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
+                
+                input_new.innerHTML         =   element.innerHTML
+
+                if(label_new.innerHTML      ==  "Marque de produit (Achat)")
                 {
-                    label_new.innerHTML         =   element.previousSibling.previousSibling.innerHTML
-                    input_new.innerHTML         =   element.innerHTML
-
-                    div_block_achat.appendChild(label_new)
-                    div_block_achat.appendChild(input_new)
+                    input_new.value         =   option_marque
                 }
+
+                if(label_new.innerHTML      ==  "Type de produit (Achat)")
+                {
+                    input_new.value         =   option_type
+                }
+
+                div_block_achat.appendChild(label_new)
+                div_block_achat.appendChild(input_new)
             }
             
             block_achat.appendChild(div_block_achat)
         });
 
-        var element_insert              =   document.getElementById("Qte_vendu_par_Jour")
-        element_insert.parentNode.parentNode.insertBefore(block_achat,element_insert.parentNode.nextSibling)
-
-        var elm = GetElementInsideContainer("achat_"+k, "Marque_de_produit_(Achat)_"+k)
-        elm.value=option_value;
+        if(k    ==  1)
+        {
+            var element_insert              =   document.getElementById("Qte_vendu_par_Jour")
+            element_insert.parentNode.parentNode.insertBefore(block_achat,element_insert.parentNode.nextSibling)
+        }
+        else
+        {
+            var element_insert              =   document.getElementById("Qte_vendu_par_Jour_"+(k-1))
+            element_insert.parentNode.parentNode.parentNode.insertBefore(block_achat,element_insert.parentNode.parentNode.nextSibling)
+        }
 
         GriserSelect("Marque_de_produit_(Achat)_"+k)
+        GriserSelect("Type_de_produit_(Achat)_"+k)
 
         k   =   k+1;
     }
+
+    //
 
     function RemoveHiddenTypes()
     {

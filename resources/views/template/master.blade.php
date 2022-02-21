@@ -10,6 +10,10 @@
     <!--  -->
     <link rel="stylesheet" href="{{url('css/mobileview.css')}}">
     <!--  -->
+
+    <!--  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!--  -->
     
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{url('template/vendors/feather/feather.css')}}">

@@ -128,6 +128,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton4">
 
                                     <a class="dropdown-item" href="{{route('formulaire.visualisation',$formulaire->id_formulaire)}}">Visualiser le formulaire</a>
+                                    <a class="dropdown-item" href="{{route('formulaire.reponses',$formulaire->id_formulaire)}}">Consulter les reponses</a>
                                     <a class="dropdown-item" href="{{route('formulaire_questions.index',$formulaire->id_formulaire)}}">Lister les Questions</a>
                                     <a class="dropdown-item" href="{{route('formulaire_groupes.index',$formulaire->id_formulaire)}}">Lister les Groupes</a>
                                     

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 @media (max-width:480px)
 {
     #facing_button_minus_id    
@@ -15,4 +17,159 @@ body input[type="file"]
 {
     width   :   100%!important;
 }
+
+.icon-style
+{
+    font-size   : 25px;
+    color       : #34B1AA !important;
+}
     
+td
+{
+    font-weight : bold;
+    font-family : "Roboto";
+    color       : #1572A1 !important;
+}
+
+form
+{
+    font-family : "Roboto";
+    color       : #1572A1 !important;
+}
+
+.btn-minus
+{
+    background-color: #34B1AA !important;
+}
+
+.btn-add
+{
+    background-color: #1572A1 !important;
+}
+
+h4
+{
+    font-weight: bold !important;
+}
+
+#next
+{
+    width: 121px !important;
+}
+
+#last
+{
+    width: 121px !important;
+}
+
+#sauvgarder
+{
+    width: 121px !important;
+    margin-right: 0px !important
+}
+
+#back
+{
+    width: 121px !important;
+}
+
+
+.slide_form_right
+{
+    animation: slide-in-right 1s;
+}
+
+.slide_form_left 
+{
+    position    :   relative;
+    animation   :   slide-in-left 1s
+    /* animation: slide-in-left 1s; */
+}
+
+@-webkit-keyframes slide-in-right
+{
+    0%
+    {
+        -webkit-transform:translateX(1000px);
+        transform:translateX(1000px);
+        opacity:0
+    }
+        
+    100%
+    {
+        -webkit-transform:translateX(0);
+        transform:translateX(0);opacity:1
+    }
+}
+
+@keyframes slide-in-right
+{
+    0%
+    {
+        -webkit-transform:translateX(1000px);
+        transform:translateX(1000px);
+        opacity:0
+    }
+    
+    100%
+    {
+        -webkit-transform:translateX(0);
+        transform:translateX(0);
+        opacity:1
+    }
+}
+
+@-webkit-keyframes slide-in-left
+{
+    /* 0%
+    {
+        -webkit-transform:translateX(0);
+        transform:translateX(0);opacity:1   
+    }
+        
+    100%
+    {
+        -webkit-transform:translateX(1000px);
+        transform:translateX(1000px);
+        opacity:0
+    } */
+
+    from
+    {
+        left:-555px;opacity:0
+    } 
+
+    to
+    {
+        left:0;opacity:1
+    }
+}
+
+@keyframes slide-in-left
+{
+    /* 0%
+    {
+        -webkit-transform:translateX(0);
+        transform:translateX(0);
+        opacity:1
+    }
+    
+    100%
+    {
+        -webkit-transform:translateX(1000px);
+        transform:translateX(1000px);
+        opacity:0
+    } */
+
+    from
+    {
+        left:-555px;opacity:0
+    } 
+
+    to
+    {
+        left:0;opacity:1
+    }
+}
+
+/* Animation */

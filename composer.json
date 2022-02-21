@@ -11,8 +11,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "kris/laravel-form-builder": "^1.40",
         "laravel/framework": "^8.40",
-        "nunomaduro/collision": "^5.0",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "laravel/ui": "2.*",
+        "nunomaduro/collision": "^5.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -54,7 +55,10 @@
         "platform-check": false,
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "7.4.3"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

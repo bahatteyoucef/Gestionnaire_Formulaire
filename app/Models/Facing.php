@@ -14,4 +14,8 @@ class Facing extends Model
     protected $table = 'facings';
     protected $primaryKey = 'id_facing';
 
+    public function pos()
+    {
+        return $this->belongsTo('App\Models\POS','id_pos','id_pos');
+    }
 }

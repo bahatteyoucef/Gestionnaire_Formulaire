@@ -3,8 +3,8 @@
 
 @section('main_section')
 
-<div class="content-wrapper">
-  <div class="card">
+<div class="content-wrapper" class="">
+  <div class="card" id="form_card" class="slide-in-right">
     <div class="card-body">
 
       <table class="table table-borderless" id="mobile_divs">
@@ -19,20 +19,24 @@
 
           <tr>
             <td class="text-center" style="width: 50%">
-              <div onclick="InfoPOSFunctionShow()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%">                
-                <i class="mdi mdi-store" style="font-size: 25px"></i>
+              <div onclick="InfoPOSFunctionShow_Question_By_Question()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%" style="margin-bottom: 0px !important;">                
+                <i class="mdi mdi-store icon-style"></i>
                 <br/>
                 <br/>
-                <span>Info POS</span>
+                <span class="span-style">Info POS</span>
+                <br/>
+                <br/>
               </div>
             </td>  
 
             <td class="text-center" style="width: 50%">
-              <div onclick="AchatsFunctionShow()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%">
-                <i class="mdi mdi-cash" style="font-size: 25px"></i>
+              <div onclick="AchatsFunctionShow_Question_By_Question()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%" style="margin-bottom: 0px !important;">
+                <i class="mdi mdi-cash icon-style"></i>
                 <br/>
                 <br/>
-                <span>Achats</span>
+                <span class="span-style">Achats</span>
+                <br/>
+                <br/>
               </div>
             </td>  
           </tr>
@@ -40,66 +44,72 @@
           <tr>
             
             <td class="text-center" style="width: 50%">
-              <div onclick="FrigosFunctionShow()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%">
-                <i class="mdi mdi-fridge" style="font-size: 25px"></i>
+              <div onclick="FrigosFunctionShow_Question_By_Question()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%" style="margin-bottom: 0px !important;">
+                <i class="mdi mdi-fridge icon-style"></i>
                 <br/>
                 <br/>
-                <span>Frigos</span>
+                <span class="span-style">Frigos</span>
+                <br/>
+                <br/>
               </div>
             </td>  
 
             <td class="text-center">
-              <div onclick="AuditFunctionShow()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%">
-                <i class="mdi mdi-clipboard-check" style="font-size: 25px"></i>
+              <div onclick="AuditFunctionShow_Question_By_Question()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%" style="margin-bottom: 0px !important;">
+                <i class="mdi mdi-clipboard-check icon-style"></i>
                 <br/>
                 <br/>
-                <span>Audit</span>
+                <span class="span-style">Audit</span>
+                <br/>
+                <br/>
               </div>
             </td>  
           </tr>
  
           <tr>
             <td class="text-center" style="width: 50%">
-              <div onclick="PLVExterieursFunctionShow()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%">
-                <i class="mdi mdi-fridge" style="font-size: 25px"></i>
+              <div onclick="PLVExterieursFunctionShow_Question_By_Question()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%" style="margin-bottom: 0px !important;">
+                <i class="mdi mdi-fridge icon-style"></i>
                 <br/>
                 <br/>
-                <span>PLV</span>
+                <span class="span-style">PLV</span>
                 <br/>
-                <span>Exterieur</span>
+                <span class="span-style">Exterieur</span>
               </div>
             </td>  
 
             <td class="text-center" style="width: 50%">
-              <div onclick="PLVInterieursFunctionShow()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%">
-                <i class="mdi mdi-clipboard-check" style="font-size: 25px"></i>
+              <div onclick="PLVInterieursFunctionShow_Question_By_Question()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%" style="margin-bottom: 0px !important;">
+                <i class="mdi mdi-clipboard-check icon-style"></i>
                 <br/>
                 <br/>
-                <span>PLV</span>
+                <span class="span-style">PLV</span>
                 <br/>
-                <span>Interieur</span>
+                <span class="span-style">Interieur</span>
               </div>
             </td>  
           </tr>
 
           <tr>
             <td class="text-center" style="width: 50%">
-              <div onclick="ProduitsFunctionShow()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%">
-                <i class="mdi mdi-food" style="font-size: 25px"></i>
+              <div onclick="ProduitsFunctionShow_Question_By_Question()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%">
+                <i class="mdi mdi-food icon-style"></i>
                 <br/>
                 <br/>
-                <span>Photo</span> 
+                <span class="span-style">Photo</span> 
                 <br/>
-                <span>Produits</span>
+                <span class="span-style">Produits</span>
               </div>
             </td>  
 
             <td class="text-center" style="width: 50%">
-              <div onclick="FacingsFunctionShow()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%">
-                <i class="mdi mdi-crosshairs-gps" style="font-size: 25px"></i>
+              <div onclick="FacingsFunctionShow_Question_By_Question()" class="shadow-sm p-3 mb-5 bg-white rounded" height="90%" width="90%">
+                <i class="mdi mdi-crosshairs-gps icon-style"></i>
                 <br/>
                 <br/>
-                <span>Facings</span>
+                <span class="span-style">Facings</span>
+                <br/>
+                <br/>
               </div>
             </td>  
           </tr>
@@ -107,7 +117,7 @@
         </tbody>
       </table>
 
-      <div class="" id="formulaire_form">
+      <div id="formulaire_form">
         {!! form($form) !!}
       </div>
 

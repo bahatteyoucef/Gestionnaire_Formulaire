@@ -12,8 +12,7 @@ use App\Models\Formulaire;
 use App\Models\FormulaireGroupeQuestion;
 use App\Models\TypeQuestion;
 use App\Models\Question;
-
-use App\Http\Controllers\POSController;
+use App\Models\POS;
 
 class FormulaireController extends Controller
 {
@@ -100,7 +99,7 @@ class FormulaireController extends Controller
             'route'         => 'POS.store'
         ],['formulaire'     =>  $formulaire,
             'id_formulaire' =>  $id_formulaire    
-    ]);
+        ]);
 
         return view( $this->url.'.visualisation')->with('form',$form);
     }
@@ -117,6 +116,12 @@ class FormulaireController extends Controller
         ]);
 
         return view( $this->url.'./mobile/mobilevisualisation')->with('form',$form);
+    }
+
+    public function reponses($id_formulaire)
+    {
+        $formulaire =   Formulaire::find($id_formulaire);
+        return view( $this->url . 'reponses')->with('reponses', $formulaire::find($id_formulaire)->reponses());
     }
 
     //

@@ -13,4 +13,9 @@ class Frigo extends Model
 
     protected $table = 'frigos';
     protected $primaryKey = 'id_frigo';
+
+    public function pos()
+    {
+        return $this->belongsTo('App\Models\POS','id_pos','id_pos');
+    }
 }

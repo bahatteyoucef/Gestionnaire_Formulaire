@@ -14,13 +14,9 @@ use App\Models\POS;
 use App\Models\Facing;
 use App\Models\Frigo;
 use App\Models\PhotoRayon;
-
 use App\Models\Question;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
 
-use Exception;
-use Throwable;
+use Illuminate\Support\Str;
 
 class POSController extends Controller
 {
@@ -65,6 +61,38 @@ class POSController extends Controller
     {
         return view( $this->url . 'destroy');
     }
+
+    public function achats($id_pos)
+    {
+        $achats =   POS::find($id_pos)->AchatsDetails();
+        return view( $this->url . 'achats.'         .'index')->with('achats'        , $achats);
+    }
+
+    public function facings($id_pos)
+    {
+        $facings =   POS::find($id_pos)->FacingsDetails();
+        return view( $this->url . 'facings.'         .'index')->with('facings'        , $facings);
+    }
+
+    public function frigos($id_pos)
+    {
+        $frigos =   POS::find($id_pos)->FrigosDetails();
+        return view( $this->url . 'frigos.'         .'index')->with('frigos'        , $frigos);
+    }
+
+    public function plvInterieurs($id_pos)
+    {
+        $plvInterieurs =   POS::find($id_pos)->PLVInterieurDetails();
+        return view( $this->url . 'plvInterieurs.'  .'index')->with('plvInterieurs' , $plvInterieurs);
+    }
+
+    public function plvExterieurs($id_pos)
+    {
+        $plvExterieurs =   POS::find($id_pos)->PLVExterieurDetails();
+        return view( $this->url . 'plvExterieurs.'  .'index')->with('plvExterieurs' , $plvExterieurs);
+    }
+
+    //Store
 
     public function store(Request $request)
     {
@@ -290,7 +318,7 @@ class POSController extends Controller
     public function StoreModels($request)
     {
         $id_pos  = $this->createPOS($request);
-     
+
         $this->createPLVInterieur($request);        
         $this->createPLVExterieur($request);
         $this->createProduitFacing($request,$id_pos);
@@ -322,7 +350,11 @@ class POSController extends Controller
             }
         }
         
+        $POS->id_enquetteur =   $request->id_user;
+        $POS->id_formulaire =   $request->id_formulaire;
+
         $POS->save();
+
         return $POS->id_pos;
     }
 
@@ -726,7 +758,10 @@ class POSController extends Controller
         }
     }
 
+    //
+
     //Photo
+
     public function createPhotoRayon($request,$id_pos)
     {
         if($request->hasFile('Photo_des_produits_sur_rayon'))

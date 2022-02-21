@@ -8,6 +8,8 @@ use App\Models\Groupe;
 
 use Kris\LaravelFormBuilder\Form;
 
+use Illuminate\Support\Facades\Auth;
+
 class FormulaireForm extends Form
 {
     public $types_questions     =   [];
@@ -23,6 +25,7 @@ class FormulaireForm extends Form
         $current_id_groupe  =   -1;
 
         $this->addFormulaireID($this->getData('id_formulaire'));
+        $this->addUser();
 
         foreach($this->getData('formulaire') as $formulaire_groupe_question)
         {
@@ -211,6 +214,19 @@ class FormulaireForm extends Form
         );
     }
 
+    private function addUser()
+    {
+        $this->add("id_user", "hidden", [
+                'value' =>  Auth::user()->id,
+                'attr' => [
+                    'id'    =>  "id_user",
+                    'value' =>  Auth::user()->id,
+                    'hidden'=>  "hidden"
+                ]
+            ]
+        );
+    }
+
     private function addFormulaireID($id_formulaire)
     {
         $this->add("id_formulaire", "hidden", [
@@ -299,9 +315,9 @@ class FormulaireForm extends Form
     //HELPERS_Data_Base
     private function Zone_dachalendage($question,$description_question)
     {
-        if($description_question    ==  "Zone d'achalendage")
+        if($description_question    ==  "Zone Achalendage")
         {
-            $this->add('Zone d\'achalendage', 'entity', [
+            $this->add('Zone Achalendage', 'entity', [
                 'class' => 'App\Models\ZoneAchalendage',
                 'property' => 'libelle_zone_achalendage',
                 'attr' => [
@@ -315,9 +331,9 @@ class FormulaireForm extends Form
 
     private function Source_Dachat($question,$description_question)
     {
-        if($description_question    ==  "Source d'achat")
+        if($description_question    ==  "Source Achat")
         {
-            $this->add('Source d\'achat', 'entity', [
+            $this->add('Source Achat', 'entity', [
                 'class' => 'App\Models\SourceAchat',
                 'property' => 'libelle_source_achat',
                 'attr' => [

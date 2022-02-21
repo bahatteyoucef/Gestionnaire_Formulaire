@@ -8,6 +8,8 @@ use App\Models\Groupe;
 
 use Kris\LaravelFormBuilder\Form;
 
+use Illuminate\Support\Facades\Auth;
+
 class mobileFormulaireForm extends Form
 {
     public $types_questions     =   [];
@@ -23,6 +25,7 @@ class mobileFormulaireForm extends Form
         $current_id_groupe  =   -1;
 
         $this->addFormulaireID($this->getData('id_formulaire'));
+        $this->addUser();
 
         foreach($this->getData('formulaire') as $formulaire_groupe_question)
         {
@@ -60,6 +63,9 @@ class mobileFormulaireForm extends Form
         $this->addSubmit();
         $this->addBack();
         $this->addSauvgarder();
+
+        $this->addNext();
+        $this->addLast();
     }
 
     private function addSubmit()
@@ -68,18 +74,18 @@ class mobileFormulaireForm extends Form
             'attr'  => [
                 "name"  =>  "submit",
                 "id"    =>  "submit",
-                "class" =>  "btn btn-primary"
+                "class" =>  "btn btn-success"
             ]
         ]);
     }
 
     private function addBack()
     {
-        $this->add("Back", "button", [
+        $this->add("Annuler", "button", [
             'attr'  => [
                 "name"  =>  "back",
                 "id"    =>  "back",
-                "class" =>  "btn btn-primary",
+                "class" =>  "btn btn-success",
                 "style" =>  "margin-right : 21px;float:left",
                 "type"  =>  "button"
             ]
@@ -88,11 +94,37 @@ class mobileFormulaireForm extends Form
 
     private function addSauvgarder()
     {
-        $this->add("Sauvgarder", "button", [
+        $this->add("Valider", "button", [
             'attr'  => [
                 "name"      =>  "sauvgarder",
                 "id"        =>  "sauvgarder",
-                "class"     =>  "btn btn-primary",
+                "class"     =>  "btn btn-success",
+                "style"     =>  "margin-right : 21px;float:right;",
+                "type"      =>  "button"
+            ]
+        ]);
+    }
+
+    private function addLast()
+    {
+        $this->add("Precedent", "button", [
+            'attr'  => [
+                "name"      =>  "last",
+                "id"        =>  "last",
+                "class"     =>  "btn btn-success",
+                "style"     =>  "margin-right : 21px;float:left",
+                "type"      =>  "button"
+            ]
+        ]);
+    }
+
+    private function addNext()
+    {
+        $this->add("Suivant", "button", [
+            'attr'  => [
+                "name"      =>  "next",
+                "id"        =>  "next",
+                "class"     =>  "btn btn-success",
                 "style"     =>  "float:right;",
                 "type"      =>  "button"
             ]
@@ -240,6 +272,19 @@ class mobileFormulaireForm extends Form
         );
     }
 
+    private function addUser()
+    {
+        $this->add("id_user", "hidden", [
+                'value' =>  Auth::user()->id,
+                'attr' => [
+                    'id'    =>  "id_user",
+                    'value' =>  Auth::user()->id,
+                    'hidden'=>  "hidden"
+                ]
+            ]
+        );
+    }
+
     private function addFormulaireID($id_formulaire)
     {
         $this->add("id_formulaire", "hidden", [
@@ -261,7 +306,7 @@ class mobileFormulaireForm extends Form
 
             $this->add($description_question, "select", [
                 'choices' => ['0' => 'Non', '1' => 'Oui'],
-                'selected' => '0',           
+                'selected' => '1',           
                 'attr'  => [
                     "name"  =>  $this->addProperId($description_question),
                     "id"    =>  $this->addProperId($description_question),
@@ -328,9 +373,9 @@ class mobileFormulaireForm extends Form
     //HELPERS_Data_Base
     private function Zone_dachalendage($question,$description_question)
     {
-        if($description_question    ==  "Zone d'achalendage")
+        if($description_question    ==  "Zone Achalendage")
         {
-            $this->add('Zone d\'achalendage', 'entity', [
+            $this->add('Zone Achalendage', 'entity', [
                 'class' => 'App\Models\ZoneAchalendage',
                 'property' => 'libelle_zone_achalendage',
                 'attr' => [
@@ -344,9 +389,9 @@ class mobileFormulaireForm extends Form
 
     private function Source_Dachat($question,$description_question)
     {
-        if($description_question    ==  "Source d'achat")
+        if($description_question    ==  "Source Achat")
         {
-            $this->add('Source d\'achat', 'entity', [
+            $this->add('Source Achat', 'entity', [
                 'class' => 'App\Models\SourceAchat',
                 'property' => 'libelle_source_achat',
                 'attr' => [
@@ -382,9 +427,10 @@ class mobileFormulaireForm extends Form
                 'class' => 'App\Models\TypeProduit',
                 'property' => 'libelle_type_produit',
                 'attr' => [
-                    "name"  =>  $this->addProperId($description_question),
-                    "id"    =>  $this->addProperId($description_question),
-                    "class" =>  "form-control js-example-basic-single w-100 btn btn-success groupe_".$question->id_groupe
+                    'disabled'  =>  "disabled",
+                    "name"      =>  $this->addProperId($description_question),
+                    "id"        =>  $this->addProperId($description_question),
+                    "class"     =>  "form-control js-example-basic-single w-100 btn btn-success groupe_".$question->id_groupe
                 ]
             ]);
         }

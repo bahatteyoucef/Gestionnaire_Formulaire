@@ -13,4 +13,9 @@ class AchatProduit extends Model
 
     protected $table = 'achat_produits';
     protected $primaryKey = 'id_achat_produit';
+
+    public function pos()
+    {
+        return $this->belongsTo('App\Models\POS','id_pos','id_pos');
+    }
 }
