@@ -88,6 +88,25 @@
                     <label for="ordre_question">Order</label>
                     <input type="text" class="form-control" name="ordre_question" id="ordre_question" placeholder="">
                 </div>
+
+                <!--  -->
+
+                <div class="form-group" id="form_type">
+                    <label for="id_type_chart">Type Chart</label>
+                    <br/>
+                    
+                    <button class="btn btn-sm dropdown-toggle" id="id_type_chart" 
+                        type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+
+                    <input type="text" name="id_type_chart_value" id="id_type_chart_value" hidden>
+                    <div class="dropdown-menu w-100, mt-0" aria-labelledby="id_groupe">
+                        @foreach($types_chart as $type_chart)
+                            <li><a class="dropdown-type-chart-groupe-item dropdown-item position-static" 
+                            value="{{$type_chart->id_type_chart}}" >{{$type_chart->type_chart}}</a></li>
+                        @endforeach
+                    </div>
+                </div>
                 
                 <button type="submit" class="btn btn-primary me-2">Submit</button>
             </form>

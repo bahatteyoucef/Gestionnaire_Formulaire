@@ -6,15 +6,58 @@
     var l   =   1;
     var m   =   1;
 
+    var button_clicked  =   0
+
     document.addEventListener("DOMContentLoaded", function(event) { 
         addGroupeNameAndButtons()
         addBreakBeforeFiles()
         RemoveHiddenTypes()
-        // HideModelFrigo()
-        ToggleModelFrigo()
         AchatPourChaqueMarque()
         addParentForButtonsAndEvents()
+        GriserDefaultSelections()
+
+        //After clicking submit
+        document.getElementById("submit").addEventListener("click",function(e) {
+            if(button_clicked   ==  0)
+            {
+                e.preventDefault();
+
+                var inputs      =   document.querySelectorAll('[disabled="disabled"]');
+
+                inputs.forEach(input => {
+                    input.removeAttribute("disabled")
+                });
+
+                button_clicked  =   button_clicked  +   1
+            }
+
+            document.getElementById("submit").click()
+        });
     })
+
+    //Griser Select
+    function GriserDefaultSelections()
+    {
+        let Disponibilité_Frigo     =   document.getElementById("Disponibilité_Frigo")
+        Disponibilité_Frigo.value   =   0
+
+        let Disponibilité_PLV_Int   =   document.getElementById("Disponibilité_PLV_Int")
+        Disponibilité_PLV_Int.value =   0
+
+        let Disponibilité_PLV_Ext   =   document.getElementById("Disponibilité_PLV_Ext")
+        Disponibilité_PLV_Ext.value =   0
+
+        let Disponibilité_Facing    =   document.getElementById("Disponibilité_Facing")
+        Disponibilité_Facing.value  =   0 
+
+        GriserSelect("Marque_de_produit_(Achat)")
+        GriserSelect("Type_de_produit_(Achat)")
+
+        GriserSelect("Disponibilité_Frigo")
+        GriserSelect("Disponibilité_PLV_Int")
+        GriserSelect("Disponibilité_PLV_Ext")
+        GriserSelect("Disponibilité_Facing")
+    }
 
     // Formulaire Functions
     function addGroupeNameAndButtons()
@@ -786,8 +829,8 @@
 
     function GriserSelect(select)
     {
-        var selectMarque    =   document.getElementById(select);
-        selectMarque.setAttribute("disabled", "disabled");
+        var selectMarque                    =   document.getElementById(select);
+        selectMarque.style.pointerEvents    =   "none";
     }
         
     function GetElementInsideContainer(containerID, childID) {

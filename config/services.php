@@ -25,9 +25,15 @@ return [
     ],
 
     'ses' => [
-        'key' => env('AWS_ACCESS_KEY_ID'),
-        'secret' => env('AWS_SECRET_ACCESS_KEY'),
-        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+        'key'       => env('AWS_ACCESS_KEY_ID'),
+        'secret'    => env('AWS_SECRET_ACCESS_KEY'),
+        'region'    => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+
+    'google' => [
+        'client_id'     => '866857684254-pute44gl27vdkumr8kglid56dv5lfv8q.apps.googleusercontent.com', //USE FROM Google DEVELOPER ACCOUNT
+        'client_secret' => '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', //USE FROM Google DEVELOPER ACCOUNT
+        'redirect'      => 'http://localhost:8000/public/login/google/callback'
     ],
 
 ];

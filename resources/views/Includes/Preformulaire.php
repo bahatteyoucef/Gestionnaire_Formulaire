@@ -2297,6 +2297,10 @@
 
             NextButton.addEventListener("click", GoToNombreFrigo)
             LastButton.addEventListener("click", GoBackMobileDivs_Frigo)
+
+            //Set Attribut to "Non" Frigo
+            let Disponibilité_Frigo     =   document.getElementById("Disponibilité_Frigo")
+            Disponibilité_Frigo.value   =   0
         }
     }
 
@@ -2431,8 +2435,9 @@
         }
 
         var elm     =   GetElementInsideContainer("frigo_"+m, "Disponibilité_Frigo_"+m)
-        
         elm.value   =   1;
+        
+        console.log(elm.value)
 
         GriserSelect("Disponibilité_Frigo_"+m)
 
@@ -2470,6 +2475,9 @@
 
     function InitialiserNombreFrigo()
     {
+        let Disponibilité_Frigo     =   document.getElementById("Disponibilité_Frigo")
+        Disponibilité_Frigo.value   =   1
+
         for (let i = 1; i < frigos_number; i++) 
         {
             Frigo_Ajouter()
@@ -2536,6 +2544,10 @@
 
             NextButton.addEventListener("click", GoToNombrePLVExt)
             LastButton.addEventListener("click", GoBackMobileDivs_PLV_Ext)
+
+            //Set Attribut to "Non" PLV Ext
+            let Disponibilité_PLV_Ext     =   document.getElementById("Disponibilité_PLV_Ext")
+            Disponibilité_PLV_Ext.value   =   0
         }
     }
 
@@ -2703,7 +2715,10 @@
     }
 
     function InitialiserNombrePLVExt()
-    {
+    { 
+        let Disponibilité_PLV_Ext     =   document.getElementById("Disponibilité_PLV_Ext")
+        Disponibilité_PLV_Ext.value   =   1
+
         for (let i = 1; i < plv_ext_number; i++) 
         {
             PLVExterieur_Ajouter()
@@ -2770,6 +2785,10 @@
 
             NextButton.addEventListener("click", GoToNombrePLVInt);
             LastButton.addEventListener("click", GoBackMobileDivs_PLV_Int);
+
+            //Set Attribut to "Non" PLV Int 
+            let Disponibilité_PLV_Int     =   document.getElementById("Disponibilité_PLV_Int")
+            Disponibilité_PLV_Int.value   =   0
         }
     }
 
@@ -2935,6 +2954,9 @@
 
     function InitialiserNombrePLVInt()
     {
+        let Disponibilité_PLV_Int     =   document.getElementById("Disponibilité_PLV_Int")
+        Disponibilité_PLV_Int.value   =   1
+
         for (let i = 1; i < plv_int_number; i++) 
         {
             PLVInterieur_Ajouter()
@@ -3001,6 +3023,11 @@
 
             NextButton.addEventListener("click", GoToNombrePLVInt)
             LastButton.addEventListener("click", GoBackMobileDivs_PLV_Int)
+
+            //Set Attribut to "Non" Facing 
+            let Disponibilité_Facing     =   document.getElementById("Disponibilité_Facing")
+            Disponibilité_Facing.value   =   0
+
         }
     }
 
@@ -3182,6 +3209,9 @@
 
     function InitialiserNombreFacing()
     {
+        let Disponibilité_Facing     =   document.getElementById("Disponibilité_Facing")
+        Disponibilité_Facing.value   =   1
+
         for (let i = 1; i < facings_number; i++) 
         {
             Facing_Ajouter()
@@ -3847,6 +3877,12 @@
     }
 
     //
+
+    function GriserSelect(select)
+    {
+        var selectMarque    =   document.getElementById(select);
+        selectMarque.setAttribute("disabled", "disabled");
+    }
 
     function GetElementInsideContainer(containerID) {
         var elm = {};

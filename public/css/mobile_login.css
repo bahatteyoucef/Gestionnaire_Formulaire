@@ -1,0 +1,139 @@
+.btn-2
+{
+    display: inline-block;
+    font-weight: 400;
+    color: #858796;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.35rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-google 
+{
+    color: #fff;
+    background-color: #ea4335;
+    border-color: #fff;
+}
+  
+.btn-google:hover
+{
+    color: #fff;
+    background-color: #e12717;
+    border-color: #e6e6e6;
+}
+
+.btn-google:focus, .btn-google.focus 
+{
+    color: #fff;
+    background-color: #e12717;
+    border-color: #e6e6e6;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+  
+.btn-google.disabled, .btn-google:disabled 
+{
+    color: #fff;
+    background-color: #ea4335;
+    border-color: #fff;
+}
+  
+.btn-google:not(:disabled):not(.disabled):active, .btn-google:not(:disabled):not(.disabled).active,
+.show > .btn-google.dropdown-toggle 
+{
+    color: #fff;
+    background-color: #d62516;
+    border-color: #dfdfdf;
+}
+  
+.btn-google:not(:disabled):not(.disabled):active:focus, .btn-google:not(:disabled):not(.disabled).active:focus,
+.show > .btn-google.dropdown-toggle:focus 
+{
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+  
+.btn-user 
+{
+    font-size: 0.8rem;
+    border-radius: 10rem;
+    padding: 0.75rem 1rem;
+}
+
+.btn-block-2 {
+    display: block;
+    width: 100%;
+}
+  
+.btn-block-2 + .btn-block-2 {
+    margin-top: 0.5rem;
+}
+  
+input[type="submit"].btn-block-2,
+input[type="reset"].btn-block-2,
+input[type="button"].btn-block-2 {
+    width: 100%;
+}
+
+.fab 
+{
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1; 
+}
+
+.fab.fa-pull-left 
+{
+    margin-right: .3em; 
+}
+
+.fab.fa-pull-right 
+{
+    margin-left: .3em; 
+}
+
+.fab 
+{
+    font-family: 'Font Awesome 5 Brands';
+    font-weight: 400; 
+}
+
+.fa-google:before {
+content: "\f1a0"; }
+  
+.fa-google-drive:before {
+content: "\f3aa"; }
+
+.fa-google-pay:before {
+content: "\e079"; }
+
+.fa-google-play:before {
+content: "\f3ab"; }
+
+.fa-google-plus:before {
+content: "\f2b3"; }
+
+.fa-google-plus-g:before {
+content: "\f0d5"; }
+
+.fa-google-plus-square:before {
+content: "\f0d4"; }
+
+.fa-google-wallet:before {
+content: "\f1ee"; }
+
+.fa-fw {
+text-align: center;
+width: 1.25em; }

@@ -11,6 +11,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "kris/laravel-form-builder": "^1.40",
         "laravel/framework": "^8.40",
+        "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
         "laravel/ui": "2.*",
         "nunomaduro/collision": "^5.0"

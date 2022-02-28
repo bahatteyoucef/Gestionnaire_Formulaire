@@ -17,6 +17,7 @@ use App\Models\PhotoRayon;
 use App\Models\Question;
 
 use Illuminate\Support\Str;
+ 
 
 class POSController extends Controller
 {
@@ -93,9 +94,10 @@ class POSController extends Controller
     }
 
     //Store
-
     public function store(Request $request)
     {
+        dd($request->input());
+        
         // $this->validateStore($request);
         $this->StoreModels($request);
 

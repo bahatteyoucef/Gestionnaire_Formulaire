@@ -32,6 +32,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
             selection_inputs_destroy();
         }
     });
+
+    $('.dropdown-type-chart-groupe-item').on('click', function(event) {
+        var id_type_chart                   =   document.getElementById("id_type_chart");
+        id_type_chart.innerHTML             =   event.target.innerHTML;  
+        
+        var id_type_chart_value             =   document.getElementById("id_type_chart_value");
+        id_type_chart_value.value           =   event.target.getAttribute("value");
+    });
 });
 
 function selection_inputs_create()

@@ -12,7 +12,7 @@ use App\Models\Formulaire;
 use App\Models\FormulaireGroupeQuestion;
 use App\Models\TypeQuestion;
 use App\Models\Question;
-use App\Models\POS;
+use App\Models\TypeChart;
 
 class FormulaireController extends Controller
 {
@@ -94,7 +94,7 @@ class FormulaireController extends Controller
     {
         $formulaire =   FormulaireGroupeQuestion::where('id_Formulaire','=',$id_formulaire)->orderby("ordre_groupe")->orderby("ordre_question")->get();
 
-        $form = \FormBuilder::create(\App\Forms\FormulaireForm::class, [
+        $form = \FormBuilder::create(\App\Forms\mobileFormulaireForm::class, [
             'method'        => 'POST', 
             'route'         => 'POS.store'
         ],['formulaire'     =>  $formulaire,
@@ -115,7 +115,7 @@ class FormulaireController extends Controller
             'id_formulaire' =>  $id_formulaire    
         ]);
 
-        return view( $this->url.'./mobile/mobilevisualisation')->with('form',$form);
+        return view('Mobile'.'./formulaire/mobile/mobilevisualisation')->with('form',$form);
     }
 
     public function reponses($id_formulaire)
@@ -277,11 +277,14 @@ class FormulaireController extends Controller
     public function formulaireQuestionsCreate($id_formulaire)
     {
         $formulaire     =   Formulaire::find($id_formulaire);
+        $types_chart    =   TypeChart::all();
+
         $types_question =   TypeQuestion::all();
 
         return view($this->url . 'questions.create')->with('formulaire'     ,$formulaire)
                                                     ->with('groupes'        ,$formulaire->groupesG())
-                                                    ->with('types_question' ,$types_question);
+                                                    ->with('types_question' ,$types_question)
+                                                    ->with('types_chart'    ,$types_chart);
     }
 
     public function formulaireQuestionsStore($id_formulaire,Request $request)
@@ -330,12 +333,14 @@ class FormulaireController extends Controller
     {
         $formulaire     =   Formulaire::find($id_formulaire);
         $groupe         =   Groupe::find($id_groupe);
-        $types_question =   TypeQuestion::all();
 
+        $types_question =   TypeQuestion::all();
+        $types_chart    =   TypeChart::all();
 
         return view($this->url . 'groupes.questions.create')->with('formulaire'     ,$formulaire)
                                                             ->with('groupe'         ,$groupe)
-                                                            ->with('types_question' ,$types_question);
+                                                            ->with('types_question' ,$types_question)
+                                                            ->with('types_chart'    ,$types_chart);
     }
 
     public function formulaireGroupesQuestionsStore($id_formulaire,$id_groupe,Request $request)
@@ -436,8 +441,11 @@ class FormulaireController extends Controller
     {
         $question   =   Question::create([
             'description_question'      =>  $description_question,
-            'id_type_question'          =>  $request->id_type_question_value
+            'id_type_question'          =>  $request->id_type_question_value,
+            'id_type_chart'             =>  $request->id_type_chart_value
         ]);
+
+        dd($question);
 
         $question->save();
 
@@ -481,5 +489,5 @@ class FormulaireController extends Controller
             $formulaire_groupe_question_existe->first()->save();
         }
     }
-    //
+    
 }

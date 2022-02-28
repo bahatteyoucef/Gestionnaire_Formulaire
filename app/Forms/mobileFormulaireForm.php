@@ -27,6 +27,10 @@ class mobileFormulaireForm extends Form
         $this->addFormulaireID($this->getData('id_formulaire'));
         $this->addUser();
 
+        $this->addDisponibilitePLVInt();
+        $this->addDisponibilitePLVExt();
+        $this->addDisponibiliteFacing();
+
         foreach($this->getData('formulaire') as $formulaire_groupe_question)
         {
             $question   =   Question::find($formulaire_groupe_question->id_question);          
@@ -298,6 +302,42 @@ class mobileFormulaireForm extends Form
         );
     }
 
+    private function addDisponibilitePLVInt()
+    {
+        $this->add("Disponibilité_PLV_Int", "hidden", [
+            'attr' => [
+                'id'    =>  "Disponibilité_PLV_Int",
+                'hidden'=>  "hidden",
+                'value' =>  "0"
+            ]
+        ]
+        );
+    }
+
+    private function addDisponibilitePLVExt()
+    {
+        $this->add("Disponibilité_PLV_Ext", "hidden", [
+            'attr' => [
+                'id'    =>  "Disponibilité_PLV_Ext",
+                'hidden'=>  "hidden",
+                'value' =>  "0"
+            ]
+        ]
+        );
+    }
+
+    private function addDisponibiliteFacing()
+    {
+        $this->add("Disponibilité_Facing", "hidden", [
+                'attr' => [
+                    'id'    =>  "Disponibilité_Facing",
+                    'hidden'=>  "hidden",
+                    'value' =>  "0"
+                ]
+            ]
+        );
+    }
+
     private function addSelectionOuiNon($question)
     {
         if(($question->id_type_question == 2))
@@ -427,7 +467,6 @@ class mobileFormulaireForm extends Form
                 'class' => 'App\Models\TypeProduit',
                 'property' => 'libelle_type_produit',
                 'attr' => [
-                    'disabled'  =>  "disabled",
                     "name"      =>  $this->addProperId($description_question),
                     "id"        =>  $this->addProperId($description_question),
                     "class"     =>  "form-control js-example-basic-single w-100 btn btn-success groupe_".$question->id_groupe
@@ -511,7 +550,6 @@ class mobileFormulaireForm extends Form
                     "name"      =>  $this->addProperId($description_question),
                     "id"        =>  $this->addProperId($description_question),
                     "class"     =>  "form-control js-example-basic-single w-100 btn btn-success groupe_".$question->id_groupe,
-                    "disabled"  =>  "disabled"
                 ]
             ]);
         }

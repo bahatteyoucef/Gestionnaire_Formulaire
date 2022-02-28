@@ -10,16 +10,12 @@
         var nom_groupe              =   "<?php echo $nom_groupe; ?>";
         id_groupe.innerHTML         =   nom_groupe;
 
-        console.log(id_groupe.innerHTML)
-
         <?php $id_groupe = ""; $id_groupe=strval("".$groupe->id_groupe); ?>
 
         var id_groupe_value         =   document.getElementById("id_groupe_value")
         var id_groupe               =   "<?php echo $id_groupe; ?>";
         id_groupe_value.value       =   id_groupe;
         
-        console.log(id_groupe_value.value)
-
         $('.dropdown-type-groupe-item').on('click', function(event) {
             var id_type_question            =   document.getElementById("id_type_question");
             id_type_question.innerHTML      =   event.target.innerHTML;  
@@ -40,6 +36,14 @@
 
                 selection_inputs_destroy();
             }
+        });
+
+        $('.dropdown-type-chart-groupe-item').on('click', function(event) {
+            var id_type_chart                   =   document.getElementById("id_type_chart");
+            id_type_chart.innerHTML             =   event.target.innerHTML;  
+
+            var id_type_chart_value             =   document.getElementById("id_type_chart_value");
+            id_type_chart_value.value           =   event.target.getAttribute("value");
         });
     });
 

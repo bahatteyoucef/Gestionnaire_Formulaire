@@ -13,7 +13,8 @@
         </div>
 
         <div>
-          <a href="{{route('formulaires.create')}}"> <button type="button" class="btn btn-primary"> Add new survey </button> </a>
+          <a href="{{route('evaluations.create')}}"> <button type="button" class="btn btn-primary"> Ajouter une nouvelle evaluation </button> </a>
+          <a href="{{route('formulaires.create')}}"> <button type="button" class="btn btn-primary"> Ajouter un nouveau questionnaire </button> </a>
         </div>
 
       </div>
@@ -103,13 +104,14 @@
                   </button>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                    <a class="dropdown-item" href="{{route('formulaire.mobilevisualisation',$formulaire->id_formulaire)}}">Visualiser le formulaire</a>
-                    <a class="dropdown-item" href="{{route('formulaire.reponses',$formulaire->id_formulaire)}}">Consulter les reponses</a>
-                    <a class="dropdown-item" href="{{route('formulaires.show',$formulaire->id_formulaire)}}">Consulter les Details</a>
-                    <a class="dropdown-item" href="{{route('formulaire_questions.index',$formulaire->id_formulaire)}}">Lister les Questions</a>
-                    <a class="dropdown-item" href="{{route('formulaire_groupes.index',$formulaire->id_formulaire)}}">Lister les Groupes</a>
-                    <a class="dropdown-item" href="{{route('formulaire_questions.create',$formulaire->id_formulaire)}}">Ajouter une Question</a>
-                    <a class="dropdown-item" href="{{route('formulaire_groupes.create',$formulaire->id_formulaire)}}">Ajouter un Groupe</a>
+                    <a class="dropdown-item" href="{{route('formulaire.stats',$formulaire->id_formulaire)}}">           Consulter les statistiques  </a>
+                    <a class="dropdown-item" href="{{route('formulaire.visualisation',$formulaire->id_formulaire)}}">   Visualiser le formulaire    </a>
+                    <a class="dropdown-item" href="{{route('formulaire.reponses',$formulaire->id_formulaire)}}">        Consulter les reponses      </a>
+                    <a class="dropdown-item" href="{{route('formulaires.show',$formulaire->id_formulaire)}}">           Consulter les Details       </a>
+                    <a class="dropdown-item" href="{{route('formulaire_questions.index',$formulaire->id_formulaire)}}"> Lister les Questions        </a>
+                    <a class="dropdown-item" href="{{route('formulaire_groupes.index',$formulaire->id_formulaire)}}">   Lister les Groupes          </a>
+                    <a class="dropdown-item" href="{{route('formulaire_questions.create',$formulaire->id_formulaire)}}">Ajouter une Question        </a>
+                    <a class="dropdown-item" href="{{route('formulaire_groupes.create',$formulaire->id_formulaire)}}">  Ajouter un Groupe           </a>
                     <div class="dropdown-divider"></div>
                     
                     @if($formulaire->etat_formulaire == 0)

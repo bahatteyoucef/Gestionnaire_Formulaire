@@ -107,4 +107,19 @@ class POS extends Model
         return $facings;
     }
     // 
+
+    //Stats
+    public static function SelfServiceStats($id_question)
+    {
+        $query = '  select
+                        count(nullif(`self_service`, 0)) as TotaleOui,
+                        count(nullif(`self_service`, 1)) as TotaleNon
+ 
+                    FROM    pos
+        ';
+
+        $data = DB::select($query , []);  
+
+        return $data;       
+    }
 }
